@@ -1,12 +1,12 @@
 package com.shuklansh.springInitProj.runners.run;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/runs")
@@ -27,6 +27,31 @@ public class RunController {
 
     @GetMapping("/{id}")
     Run getRunFromId(@PathVariable Integer id) {
-        return runRepository.findById(id);
+        Optional<Run> output = runRepository.findById(id);
+        if (output.isEmpty()) {
+/*            throw new ResponseStatusException(HttpStatus.NO_CONTENT); // could be used later?
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND); // now we will use specific error*/
+            throw new RunNotFoundException();
+        } else {
+            return output.get();
+        }
+    }
+
+    @ResponseStatus(HttpStatus.CREATED)
+    @PostMapping("")
+    void addRunRecord(@RequestBody Run run) {
+        runRepository.addRunRecord(run);
+    }
+
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @PutMapping("/{id}")
+    void updateRunFromId(@RequestBody Run run, @PathVariable Integer id) {
+        runRepository.updateRunRecord(run, id);
+    }
+
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    @DeleteMapping("/{id}")
+    void deleteRunFromId(@PathVariable Integer id) {
+        runRepository.deleteRunRecordFromId(id);
     }
 }
