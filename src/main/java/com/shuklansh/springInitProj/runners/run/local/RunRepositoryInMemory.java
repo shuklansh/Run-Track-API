@@ -1,5 +1,7 @@
-package com.shuklansh.springInitProj.runners.run;
+package com.shuklansh.springInitProj.runners.run.local;
 
+import com.shuklansh.springInitProj.runners.run.Location;
+import com.shuklansh.springInitProj.runners.run.Run;
 import jakarta.annotation.PostConstruct;
 import org.springframework.stereotype.Repository;
 
@@ -10,7 +12,7 @@ import java.util.Objects;
 import java.util.Optional;
 
 @Repository
-public class RunRepository {
+public class RunRepositoryInMemory {
     private List<Run> runs = new ArrayList<>();
 
     // GET

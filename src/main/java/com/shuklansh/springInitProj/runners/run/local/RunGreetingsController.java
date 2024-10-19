@@ -1,4 +1,4 @@
-package com.shuklansh.springInitProj.runners.run;
+package com.shuklansh.springInitProj.runners.run.local;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

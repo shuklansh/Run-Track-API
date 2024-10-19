@@ -13,12 +13,12 @@ import org.springframework.context.annotation.Bean;
 import java.time.LocalDateTime;
 
 @SpringBootApplication
-public class RunnersApplication {
+public class Application {
 
-	private static final Logger log = LoggerFactory.getLogger(RunnersApplication.class);
+	private static final Logger log = LoggerFactory.getLogger(Application.class);
 
 	public static void main(String[] args) {
-		ConfigurableApplicationContext context =  SpringApplication.run(RunnersApplication.class, args);
+		ConfigurableApplicationContext context =  SpringApplication.run(Application.class, args);
 		WelcomeMessage welcomeMessage = (WelcomeMessage) context.getBean("welcomeMessage");
 		System.out.println(welcomeMessage.getWelcomeMessage("Ansh"));
 	}

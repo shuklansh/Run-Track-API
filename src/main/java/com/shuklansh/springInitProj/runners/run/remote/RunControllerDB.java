@@ -1,22 +1,18 @@
-package com.shuklansh.springInitProj.runners.run;
+package com.shuklansh.springInitProj.runners.run.remote;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import com.shuklansh.springInitProj.runners.run.Run;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/runs")
-public class RunController {
+public class RunControllerDB {
+    private final RunRepositoryDB runRepository;
 
-    // @Autowired -> field injection (NOT recommended)
-    private final RunRepository runRepository;
-
-    public RunController(RunRepository runRepository) { // constructor (same name as parent class)
-        // injects RunRepository in this class because of @Repository annotation on RunRepository
+    public RunControllerDB(RunRepositoryDB runRepository) {
         this.runRepository = runRepository;
     }
 
@@ -25,12 +21,13 @@ public class RunController {
         return runRepository.getAllRuns();
     }
 
+    /*
     @GetMapping("/{id}")
     Run getRunFromId(@PathVariable Integer id) {
         Optional<Run> output = runRepository.findById(id);
         if (output.isEmpty()) {
-/*            throw new ResponseStatusException(HttpStatus.NO_CONTENT); // could be used later?
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND); // now we will use specific error*/
+*//*            throw new ResponseStatusException(HttpStatus.NO_CONTENT); // could be used later?
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND); // now we will use specific error*//*
             throw new RunNotFoundException();
         } else {
             return output.get();
@@ -53,5 +50,5 @@ public class RunController {
     @DeleteMapping("/{id}")
     void deleteRunFromId(@PathVariable Integer id) {
         runRepository.deleteRunRecordFromId(id);
-    }
+    }*/
 }
