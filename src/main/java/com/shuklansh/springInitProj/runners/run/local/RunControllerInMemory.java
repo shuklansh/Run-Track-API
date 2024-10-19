@@ -2,6 +2,7 @@ package com.shuklansh.springInitProj.runners.run.local;
 
 import com.shuklansh.springInitProj.runners.run.Run;
 import com.shuklansh.springInitProj.runners.run.utils.RunNotFoundException;
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -39,13 +40,13 @@ public class RunControllerInMemory {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping("")
-    void addRunRecord(@RequestBody Run run) {
+    void addRunRecord(@Valid @RequestBody Run run) { // @Valid throws BAD_REQUEST
         runRepository.addRunRecord(run);
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @PutMapping("/{id}")
-    void updateRunFromId(@RequestBody Run run, @PathVariable Integer id) {
+    void updateRunFromId(@Valid @RequestBody Run run, @PathVariable Integer id) {
         runRepository.updateRunRecord(run, id);
     }
 
